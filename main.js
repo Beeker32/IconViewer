@@ -9,8 +9,8 @@ let mainWindow;
 
 app.whenReady().then(() => {
     mainWindow = new BrowserWindow({
-        width: 500,
-        height: 250,
+        width: 300,
+        height: 300,
         frame: false,
         transparent: true,
         resizable: false,
@@ -27,6 +27,7 @@ app.whenReady().then(() => {
     mainWindow.loadFile("index.html");
 });
 
+// Select EXE File
 ipcMain.handle("select-exe", async () => {
     const result = await dialog.showOpenDialog({
         filters: [{ name: "Executables", extensions: ["exe"] }],
@@ -35,11 +36,12 @@ ipcMain.handle("select-exe", async () => {
     return result.filePaths[0] || null;
 });
 
-ipcMain.handle("extract-icon", async (_, exePath, format) => {
+// Extract Icon & Always Save as PNG
+ipcMain.handle("extract-icon", async (_, exePath) => {
     if (!exePath) return "Error: No EXE selected.";
 
     const result = await dialog.showSaveDialog({
-        filters: [{ name: format.toUpperCase(), extensions: [format] }],
+        filters: [{ name: "PNG", extensions: ["png"] }],
     });
 
     if (!result.filePath) return "Error: No output location selected.";
@@ -47,11 +49,12 @@ ipcMain.handle("extract-icon", async (_, exePath, format) => {
     try {
         const icon = await app.getFileIcon(exePath);
         await fs.writeFile(result.filePath, icon.toPNG());
-        return "Success!";
+        return "Successfully saved icon!";
     } catch (error) {
         return `Error: ${error.message}`;
     }
 });
 
+// Window Controls
 ipcMain.on("close-app", () => app.quit());
 ipcMain.on("minimize-app", () => mainWindow.minimize());
