@@ -2,7 +2,6 @@ const { ipcRenderer } = require("electron");
 
 document.addEventListener("DOMContentLoaded", () => {
     const exePath = document.getElementById("exe-path");
-    const formatSelect = document.getElementById("format");
 
     document.getElementById("select-exe").addEventListener("click", async () => {
         const file = await ipcRenderer.invoke("select-exe");
@@ -14,8 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
             alert("Please select an EXE file.");
             return;
         }
-        const format = formatSelect.value;
-        const result = await ipcRenderer.invoke("extract-icon", exePath.innerText, format);
+        const result = await ipcRenderer.invoke("extract-icon", exePath.innerText);
         alert(result);
     });
 
