@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Icon Extractor</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div id="title-bar">
+        <div id="title">Icon Extractor</div>
+        <button id="minimize-btn">−</button>
+        <button id="close-btn">×</button>
+    </div>
+
+    <div class="container">
+        <h2>Select an EXE File</h2>
+        <input type="file" id="exe-input" accept=".exe">
+
+        <h2>Select Output Format</h2>
+        <div class="select-container">
+            <select id="format-select">
+                <option value="png">PNG</option>
+                <option value="ico">ICO</option>
+            </select>
+        </div>
+
+        <button id="extract-btn">Extract Icon</button>
+        <p id="status-message"></p>
+    </div>
+
+    <script src="renderer.js"></script>
+</body>
+</html>

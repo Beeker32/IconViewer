@@ -1,0 +1,35 @@
+{
+    "name": "iconviewer",
+    "version": "1.0.0",
+    "description": "A simple Electron app made to extract icons from an executable file.",
+    "main": "main.js",
+    "scripts": {
+        "start": "electron .",
+        "build": "electron-builder"
+    },
+    "dependencies": {
+        "@electron/remote": "^2.0.1",
+        "fs-extra": "^11.1.1",
+        "path": "^0.12.7"
+    },
+    "devDependencies": {
+        "electron": "^35.1.2",
+        "electron-builder": "^24.13.3"
+    },
+    "author": "Beeker",
+    "license": "MIT",
+    "build": {
+        "appId": "com.beeker.iconviewer",
+        "productName": "IconViewer",
+        "files": [
+            "**/*"
+        ],
+        "directories": {
+            "output": "dist"
+        },
+        "win": {
+            "target": "nsis",
+            "icon": "resources/icon/icon.ico"
+        }
+    }
+}
