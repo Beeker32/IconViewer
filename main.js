@@ -27,7 +27,6 @@ app.whenReady().then(() => {
     mainWindow.loadFile("index.html");
 });
 
-// Select EXE File
 ipcMain.handle("select-exe", async () => {
     const result = await dialog.showOpenDialog({
         filters: [{ name: "Executables", extensions: ["exe"] }],
@@ -36,7 +35,6 @@ ipcMain.handle("select-exe", async () => {
     return result.filePaths[0] || null;
 });
 
-// Extract Icon & Always Save as PNG
 ipcMain.handle("extract-icon", async (_, exePath) => {
     if (!exePath) return "Error: No EXE selected.";
 
@@ -55,6 +53,5 @@ ipcMain.handle("extract-icon", async (_, exePath) => {
     }
 });
 
-// Window Controls
 ipcMain.on("close-app", () => app.quit());
 ipcMain.on("minimize-app", () => mainWindow.minimize());
